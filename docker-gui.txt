@@ -1,0 +1,77 @@
+vnc x server
+------------
+
+# install required packages
+pacman -S ttf-dejavu xorg-fonts-misc terminus-font ttf-dejavu xfce4-terminal tint2 xorg-server-xvfb tigervnc openbox obconf obmenu python2-xdg gsimplecal --noconfirm && apacman -S ttf-font-awesome websockify novnc obmenu-generator --noconfirm
+
+# create env var for display (note display number must match for tigervnc)
+export DISPLAY=:0
+
+# start tigervnc (vnc server) - note the port that it runs on is 5900 + display number (i.e. 5900 + 0 in the case below).
+rm -rf /tmp/.X*; vncserver :0 -depth 24 -SecurityTypes=None
+
+# starts novnc (web vnc client) - note the launch.sh also starts websockify to connect novnc to tigervnc server
+nohup /usr/share/novnc/utils/launch.sh --listen 6080 --vnc localhost:5900 &
+
+# create openbox (window manager)
+nohup openbox-session &
+
+# copy default openbox menu config file to home directory (required to use obmenu) 
+cp /etc/xdg/openbox/menu.xml /home/nobody/.config/openbox/menu.xml
+
+# run panel tint2 (creates task bar)
+nohup tint2 &
+
+# run obmenu generator (dynamic openbox menus)
+obmenu-generator
+
+# run application e.g. chrome:-
+/opt/google/chrome/google-chrome -no-sandbox
+
+# connecting url:- (auto connect, and auto resize enabled)
+http://localhost:6080/vnc.html?resize=remote&host=localhost&port=6080&&autoconnect=1
+
+
+panel managers (taskbar)
+-------------
+tint2 (pacman) need xdotool also
+
+temrinal emulators
+-----------------
+xterm - traidtional simple small ts
+xfce4-terminal - alternative terminal to xterm? (requires font ttf-dejavu)
+
+fonts
+-----
+terminus-font - vey popular for terminal emulators
+xorg-fonts-misc - required to support xterm fonts
+ttf-font-awesome - popular ttf font (apacman)
+
+browsers
+-------
+firefox has bug XXXXX
+google-chrome package (apacman) requires to run as a user nobody, cannot run as rootFolder
+
+openbox
+-----
+nohup openbox-session & # need to background this
+/opt/google/chrome/google-chrome -no-sandbox # application you want to start on startup
+
+need to set theme to 'Onyx'
+
+
+notes
+-----
+need to setup env var for display, using the following:-
+export DISPLAY=:0 # where 0 = the display number entered for tigervnc
+
+bugs
+----
+
+google chrome shows the following:-
+Failed to connect to the bus: Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory
+
+fixfox crashes with known bug, workaround is --shm-size 2g to docker run
+
+
+# container needs to run privileged

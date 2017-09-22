@@ -1,0 +1,113 @@
+# Tint2 config file by Kexolino
+
+# Background definitions
+
+# ID 1
+rounded = 0
+border_width = 1
+background_color = #2D2D2D 100
+border_color = #484848 100
+
+# ID 2
+rounded = 0
+border_width = 0
+background_color = #1C1C1C 100
+border_color = #000000 100
+
+# Panel
+panel_monitor = all
+panel_position =  bottom center horizontal
+panel_size = 104% 39
+panel_margin = -2 -1
+panel_padding = 0 0 10
+panel_dock = 0
+wm_menu = 1
+panel_layer = normal
+panel_background_id = 1
+
+# Panel Autohide
+autohide = 0
+autohide_show_timeout = 0.2
+autohide_hide_timeout = 1
+autohide_height = 0
+strut_policy = follow_size
+
+# Taskbar
+taskbar_mode = single_desktop
+taskbar_padding = 0 0 10
+taskbar_background_id = 0
+taskbar_active_background_id = 0
+
+# Tasks
+urgent_nb_of_blink = 20
+task_icon = 1
+task_text = 0
+task_centered = 1
+task_maximum_size = 70 32
+task_padding = 10 4
+task_background_id = 0
+task_active_background_id = 2
+task_urgent_background_id = 0
+task_iconified_background_id = 0
+
+# Task Icons
+task_icon_asb = 100 0 0
+task_active_icon_asb = 100 0 0
+task_urgent_icon_asb = 100 0 0
+task_iconified_icon_asb = 100 0 0
+
+# Fonts
+task_font = Droid Sans 9
+task_font_color = #dcdcdc 100
+task_active_font_color = #FFFFFF 100
+task_urgent_font_color = #FFFFFF 100
+task_iconified_font_color = #dcdcdc 80
+font_shadow = 0
+
+# System Tray
+systray = 1
+systray_padding = 0 6 15
+systray_sort = left2right
+systray_background_id = 0
+systray_icon_size = 22
+systray_icon_asb = 100 0 0
+
+# Clock
+time1_format = %H:%M
+time1_font = Droid Sans 10
+clock_font_color = #dcdcdc 100
+clock_tooltip = 
+clock_padding = 10 6
+clock_background_id = 0
+clock_lclick_command = gsimplecal
+time1_timezone = 
+time2_timezone = 
+clock_tooltip_timezone = 
+
+# Tooltips
+tooltip = 0
+tooltip_padding = 2 2
+tooltip_show_timeout = 0.0
+tooltip_hide_timeout = 0.0
+tooltip_background_id = 2
+tooltip_font = Droid Sans 9
+tooltip_font_color = #FFFFFF 100
+
+# Mouse
+mouse_middle = none
+mouse_right = close
+mouse_scroll_up = toggle
+mouse_scroll_down = iconify
+
+# Battery
+battery = 0
+battery_low_status = 20
+battery_low_cmd = notify-send "battery low"
+battery_hide = 96
+bat1_font = Liberation Mono 8
+bat2_font = Liberation Mono 8
+battery_font_color = #B5B5B5 100
+battery_padding = 2 0
+battery_background_id = 0
+
+# End of config

@@ -1,0 +1,1 @@
+cp -r ./Shiki-Brave /usr/share/themes/
