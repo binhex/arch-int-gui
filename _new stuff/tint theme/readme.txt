@@ -1,1 +1,0 @@
-install theme using 'tint2 -c <path to this tint2rc file>'
