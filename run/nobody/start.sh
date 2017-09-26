@@ -16,4 +16,4 @@ nohup tint2 -c /home/nobody/tint2/tint2rc &
 nohup openbox-session &
 
 # run application (specified via env var)
-"${APP_COMMAND}"
+# STARTCMD_PLACEHOLDER

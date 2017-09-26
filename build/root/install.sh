@@ -75,17 +75,19 @@ cat <<'EOF' > /home/nobody/.config/openbox/menu.xml
         <enabled>yes</enabled>
       </startupnotify>
     </action>
-  </item>
-  <separator label="System" />
-    <item label="Openbox Configuration Manager">
+    </item>
+    <!-- APPLICATIONS_PLACEHOLDER -->
+  <separator label="Utils" />
+    <item label="Openbox config">
     <action name="Execute">
       <command>obconf</command>
       <startupnotify><enabled>yes</enabled></startupnotify>
     </action>
     </item>
-    <item label="Log Out">
-    <action name="Exit">
-      <prompt>yes</prompt>
+    <item label="Openbox menu">
+    <action name="Execute">
+      <command>obmenu</command>
+      <startupnotify><enabled>yes</enabled></startupnotify>
     </action>
     </item>
 </menu>
@@ -100,8 +102,8 @@ EOF
 cat <<'EOF' > /tmp/permissions_heredoc
 echo "[info] Setting permissions on files/folders inside container..." | ts '%Y-%m-%d %H:%M:%.S'
 
-chown -R "${PUID}":"${PGID}" /tmp /usr/share/themes /home/nobody /usr/share/novnc
-chmod -R 775 /tmp /usr/share/themes /home/nobody /usr/share/novnc
+chown -R "${PUID}":"${PGID}" /tmp /usr/share/themes /home/nobody /usr/share/novnc /etc/xdg/openbox/
+chmod -R 775 /tmp /usr/share/themes /home/nobody /usr/share/novnc /etc/xdg/openbox/
 
 EOF
 
