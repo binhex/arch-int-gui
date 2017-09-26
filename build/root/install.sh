@@ -95,25 +95,6 @@ cat <<'EOF' > /home/nobody/.config/openbox/menu.xml
 </openbox_menu>
 EOF
 
-# container perms
-####
-
-# create file with contets of here doc
-cat <<'EOF' > /tmp/permissions_heredoc
-echo "[info] Setting permissions on files/folders inside container..." | ts '%Y-%m-%d %H:%M:%.S'
-
-chown -R "${PUID}":"${PGID}" /tmp /usr/share/themes /home/nobody /usr/share/novnc /etc/xdg/openbox/
-chmod -R 775 /tmp /usr/share/themes /home/nobody /usr/share/novnc /etc/xdg/openbox/
-
-EOF
-
-# replace permissions placeholder string with contents of file (here doc)
-sed -i '/# PERMISSIONS_PLACEHOLDER/{
-    s/# PERMISSIONS_PLACEHOLDER//g
-    r /tmp/permissions_heredoc
-}' /root/init.sh
-rm /tmp/permissions_heredoc
-
 # cleanup
 yes|pacman -Scc
 rm -rf /usr/share/locale/*
