@@ -46,9 +46,3 @@ ENV TERM xterm
 
 # set environment variables for language
 ENV LANG en_GB.UTF-8
-
-# run
-#####
-
-# run tini to manage graceful exit and zombie reaping
-ENTRYPOINT ["/usr/bin/tini", "--"]
