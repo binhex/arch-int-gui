@@ -22,7 +22,7 @@ mv /root/curly.sh /usr/local/bin/
 ####
 
 # define pacman packages
-pacman_packages="ttf-dejavu xorg-fonts-misc terminus-font ttf-dejavu xfce4-terminal tint2 xorg-server-xvfb tigervnc openbox obconf obmenu python2-xdg coreutils"
+pacman_packages="ttf-dejavu xorg-fonts-misc terminus-font ttf-dejavu xfce4-terminal tint2 xorg-server-xvfb tigervnc openbox obconf obmenu python2-xdg coreutils lxappearance"
 
 # install compiled packages using pacman
 if [[ ! -z "${pacman_packages}" ]]; then
@@ -87,6 +87,12 @@ cat <<'EOF' > /home/nobody/.config/openbox/menu.xml
     <item label="Openbox menu">
     <action name="Execute">
       <command>obmenu</command>
+      <startupnotify><enabled>yes</enabled></startupnotify>
+    </action>
+    </item>
+    <item label="GTK theme">
+    <action name="Execute">
+      <command>lxappearance</command>
       <startupnotify><enabled>yes</enabled></startupnotify>
     </action>
     </item>
