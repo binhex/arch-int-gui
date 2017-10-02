@@ -120,6 +120,7 @@ gtk-xft-hinting=1
 gtk-xft-hintstyle="hintfull"
 EOF
 
+mkdir -p /home/nobody/.config/gtk-3.0
 cat <<'EOF' > /home/nobody/.config/gtk-3.0/settings.ini
 [Settings]
 gtk-theme-name=Adwaita
