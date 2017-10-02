@@ -10,9 +10,13 @@ Arch Linux is an independently developed, i686/x86-64 general purpose GNU/Linux 
 
 Arch Linux base image using "arch-scratch" image from the [binhex repository](https://hub.docker.com/r/binhex/arch-scratch/). This image is set to a snapshot by using the archive.archlinux.org website for package updates, this is required to reduce image size by preventing rolling updates to packages.
 
-```
-http://localhost:6080/vnc.html?resize=remote&host=localhost&port=6080&&autoconnect=1
-```
+**Access via web interface (noVNC)**
+
+`http://<host ip>:<host port>/vnc.html?resize=remote&host=<host ip>&port=<host port>&&autoconnect=1`
+
+e.g.:-
+
+`http://192.168.1.10:6080/vnc.html?resize=remote&host=192.168.1.10&port=6080&&autoconnect=1`
 
 **Notes**
 
