@@ -22,7 +22,7 @@ mv /root/curly.sh /usr/local/bin/
 ####
 
 # define pacman packages
-pacman_packages="ttf-dejavu xorg-fonts-misc terminus-font ttf-dejavu xfce4-terminal tint2 xorg-server-xvfb tigervnc openbox obconf obmenu python2-xdg coreutils lxappearance"
+pacman_packages="ttf-dejavu xorg-fonts-misc terminus-font ttf-dejavu xfce4-terminal tint2 xorg-server-xvfb tigervnc openbox obconf obmenu python2-xdg coreutils lxappearance xcompmgr cantarell-fonts"
 
 # install compiled packages using pacman
 if [[ ! -z "${pacman_packages}" ]]; then
@@ -42,7 +42,7 @@ source /root/aor.sh
 ####
 
 # define aur packages
-aur_packages="ttf-font-awesome websockify novnc"
+aur_packages="ttf-font-awesome websockify novnc hsetroot"
 
 # call aur install script (arch user repo)
 source /root/aur.sh
@@ -51,16 +51,13 @@ source /root/aur.sh
 ####
 
 # copy custom openbox theme
-cp -r /home/nobody/openbox/Shiki-Brave /usr/share/themes/
+cp -r /home/nobody/openbox/theme/Shiki-Brave /usr/share/themes/
 
-# copy default openbox main config file to home directory (required to set theme)
+# copy custom openbox main config file to home directory (required to set theme and menu font)
 mkdir -p /home/nobody/.config/openbox
-cp /etc/xdg/openbox/rc.xml /home/nobody/.config/openbox/rc.xml
+cp /home/nobody/openbox/config/rc.xml /home/nobody/.config/openbox/rc.xml
 
-# edit openbox main config and set theme
-sed -i -e 's~<name>Clearlooks</name>~<name>Shiki-Brave</name>~g' /home/nobody/.config/openbox/rc.xml
-
-# edit openbox menu items to add in application
+# create openbox menu items to add in application
 cat <<'EOF' > /home/nobody/.config/openbox/menu.xml
 <?xml version="1.0" encoding="UTF-8"?>
 
@@ -99,6 +96,59 @@ cat <<'EOF' > /home/nobody/.config/openbox/menu.xml
 </menu>
 
 </openbox_menu>
+EOF
+
+# set default system font (contents below generated via lxappearance util)
+cat <<'EOF' > /home/nobody/.gtkrc-2.0
+# DO NOT EDIT! This file will be overwritten by LXAppearance.
+# Any customization should be done in ~/.gtkrc-2.0.mine instead.
+
+include "/home/nobody/.gtkrc-2.0.mine"
+gtk-theme-name="Adwaita"
+gtk-icon-theme-name="Adwaita"
+gtk-font-name="Cantarell 8"
+gtk-cursor-theme-name="Adwaita"
+gtk-cursor-theme-size=0
+gtk-toolbar-style=GTK_TOOLBAR_BOTH
+gtk-toolbar-icon-size=GTK_ICON_SIZE_LARGE_TOOLBAR
+gtk-button-images=1
+gtk-menu-images=1
+gtk-enable-event-sounds=1
+gtk-enable-input-feedback-sounds=1
+gtk-xft-antialias=1
+gtk-xft-hinting=1
+gtk-xft-hintstyle="hintfull"
+EOF
+
+cat <<'EOF' > /home/nobody/.config/gtk-3.0/settings.ini
+[Settings]
+gtk-theme-name=Adwaita
+gtk-icon-theme-name=Adwaita
+gtk-font-name=Cantarell 8
+gtk-cursor-theme-name=Adwaita
+gtk-cursor-theme-size=0
+gtk-toolbar-style=GTK_TOOLBAR_BOTH
+gtk-toolbar-icon-size=GTK_ICON_SIZE_LARGE_TOOLBAR
+gtk-button-images=1
+gtk-menu-images=1
+gtk-enable-event-sounds=1
+gtk-enable-input-feedback-sounds=1
+gtk-xft-antialias=1
+gtk-xft-hinting=1
+gtk-xft-hintstyle=hintfull
+EOF
+
+# set a background color for openbox (slightly lighter than default to contrast taskbar)
+cat <<'EOF' > /home/nobody/.config/openbox/autostart
+BG=""
+if which hsetroot >/dev/null 2>/dev/null; then
+  BG=hsetroot
+elif which esetroot >/dev/null 2>/dev/null; then
+  BG=esetroot
+elif which xsetroot >/dev/null 2>/dev/null; then
+  BG=xsetroot
+fi
+test -z $BG || $BG -solid "#4d4d4d"
 EOF
 
 # cleanup
