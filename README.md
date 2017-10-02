@@ -18,6 +18,14 @@ e.g.:-
 
 `http://192.168.1.10:6080/vnc.html?resize=remote&host=192.168.1.10&port=6080&&autoconnect=1`
 
+**Access via VNC client**
+
+`<host ip>::<host port>`
+
+e.g.:-
+
+`192.168.1.10::5900`
+
 **Notes**
 
 This image includes Tini (https://github.com/krallin/tini) to ensure a clean shutdown and to correctly reap processes, Supervisor (http://supervisord.org/) is also installed to help monitor and run child processes.
