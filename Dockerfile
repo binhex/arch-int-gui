@@ -29,10 +29,10 @@ RUN chmod +x /root/*.sh && \
 # map /config to host defined config path (used to store configuration from app)
 VOLUME /config
 
-# expose port for vnc (direct connection)
+# expose port for vnc client (direct connection)
 EXPOSE 5900
 
-# expose port for novpn (vnc via web interface)
+# expose port for novnc (web interface)
 EXPOSE 6080
 
 # env
