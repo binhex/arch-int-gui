@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# CONFIG_PLACEHOLDER
+
 # create env var for display (note display number must match for tigervnc)
 export DISPLAY=:0
 
@@ -23,5 +25,4 @@ sleep 2s; tint2 -c /home/nobody/tint2/theme/tint2rc &
 # run xcomppmgr (required for transparency support for tint2)
 sleep 2s; xcompmgr &
 
-# run application (specified via env var)
 # STARTCMD_PLACEHOLDER
