@@ -6,6 +6,11 @@ export DISPLAY=:0
 # start tigervnc (vnc server) - note the port that it runs on is 5900 + display number (i.e. 5900 + 0 in the case below).
 rm -rf /tmp/.X*; vncserver :0 -depth 24 -SecurityTypes=None
 
+# if defined then set title for the web ui tab
+if [[ -n "${TITLE_NAME}" ]]; then
+	vncconfig -set desktop="${TITLE_NAME}"
+fi
+
 # starts novnc (web vnc client) - note the launch.sh also starts websockify to connect novnc to tigervnc server
 /usr/share/novnc/utils/launch.sh --listen 6080 --vnc localhost:5900 &
 
