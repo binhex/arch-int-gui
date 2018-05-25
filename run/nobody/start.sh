@@ -9,8 +9,8 @@ export DISPLAY=:0
 rm -rf /tmp/.X*; vncserver :0 -depth 24 -SecurityTypes=None
 
 # if defined then set title for the web ui tab
-if [[ -n "${TITLE_NAME}" ]]; then
-	vncconfig -set desktop="${TITLE_NAME}"
+if [[ -n "${WEBPAGE_TITLE}" ]]; then
+	vncconfig -set desktop="${WEBPAGE_TITLE}"
 fi
 
 # starts novnc (web vnc client) - note the launch.sh also starts websockify to connect novnc to tigervnc server
