@@ -11,7 +11,14 @@ vnc_start="rm -rf /tmp/.X*; vncserver :0 -depth 24"
 # if a password is specified then set generate password file
 # else append insecure flag to command line
 if [[ -n "${VNC_PASSWORD}" ]]; then
-	echo -e "${VNC_PASSWORD}\n${VNC_PASSWORD}\nn" | vncpasswd 1>&- 2>&-
+	password_length="${#VNC_PASSWORD}"
+	if [[ "${password_length}" -gt 5 ]]; then
+		echo "[info] Password length OK, proceeding to set password..."
+		echo -e "${VNC_PASSWORD}\n${VNC_PASSWORD}\nn" | vncpasswd 1>&- 2>&-
+	else
+		echo "[warn] Password specified is less than 6 characters and thus will be ignored."
+		vnc_start="${vnc_start} -SecurityTypes=None"
+	fi
 else
 	vnc_start="${vnc_start} -SecurityTypes=None"
 fi
