@@ -8,7 +8,7 @@ export DISPLAY=:0
 # vnc start command
 vnc_start="rm -rf /tmp/.X*; vncserver :0 -depth 24"
 
-# if a password is specified then set generate password file
+# if a password is specified then generate password file
 # else append insecure flag to command line
 if [[ -n "${VNC_PASSWORD}" ]]; then
 	password_length="${#VNC_PASSWORD}"

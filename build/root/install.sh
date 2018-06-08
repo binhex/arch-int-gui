@@ -152,6 +152,32 @@ fi
 test -z $BG || $BG -solid "#4d4d4d"
 EOF
 
+# env vars
+####
+
+cat <<'EOF' > /tmp/envvars_heredoc
+export WEBPAGE_TITLE=$(echo "${WEBPAGE_TITLE}" | sed -e 's~^[ \t]*~~;s~[ \t]*$~~')
+if [[ ! -z "${WEBPAGE_TITLE}" ]]; then
+	echo "[info] WEBPAGE_TITLE defined as '${WEBPAGE_TITLE}'" | ts '%Y-%m-%d %H:%M:%.S'
+fi
+
+export VNC_PASSWORD=$(echo "${VNC_PASSWORD}" | sed -e 's~^[ \t]*~~;s~[ \t]*$~~')
+if [[ ! -z "${VNC_PASSWORD}" ]]; then
+	echo "[info] VNC_PASSWORD defined as '${VNC_PASSWORD}'" | ts '%Y-%m-%d %H:%M:%.S'
+fi
+
+# ENVVARS_PLACEHOLDER
+EOF
+
+# replace env vars placeholder string with contents of file (here doc)
+# note we need to -reinsert the placeholder as other gui docker images
+# may require additonal env vars i.e. krusader
+sed -i '/# ENVVARS_PLACEHOLDER/{
+	s/# ENVVARS_PLACEHOLDER//g
+	r /tmp/envvars_heredoc
+}' /root/init.sh
+rm /tmp/envvars_heredoc
+
 # cleanup
 yes|pacman -Scc
 rm -rf /usr/share/locale/*
