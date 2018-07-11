@@ -47,6 +47,15 @@ aur_packages="ttf-font-awesome websockify novnc hsetroot"
 # call aur install script (arch user repo)
 source /root/aur.sh
 
+# config - novnc
+####
+
+# replace all novnc normal (used for bookmarks and favorites) icon sizes with fixed 16x16 icon
+sed -i -E 's~\s+<link rel="icon" sizes.*~    <link rel="icon" sizes="16x16" type="image/png" href="app/images/icons/novnc-16x16.png">~g' "/usr/share/novnc/vnc.html"
+
+# replace all novnc home screen (used for tablets etc) icon sizes with fixed 16x16 icon
+sed -i -E 's~\s+<link rel="apple-touch-icon" sizes.*~    <link rel="apple-touch-icon" sizes="16x16" type="image/png" href="app/images/icons/novnc-16x16.png">~g' "/usr/share/novnc/vnc.html"
+
 # config - openbox
 ####
 
