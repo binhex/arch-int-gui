@@ -37,10 +37,10 @@ fi
 # start dbus (required for libreoffice menus to be viewable when started via openbox right click menu) and launch openbox (window manager)
 dbus-launch openbox-session &
 
-# run tint2 (creates task bar) with custom theme
-sleep 2s; tint2 -c /home/nobody/tint2/theme/tint2rc &
-
 # run xcomppmgr (required for transparency support for tint2)
 sleep 2s; xcompmgr &
+
+# run tint2 (creates task bar) with custom theme (in while loop to restart on process end)
+sleep 2s; source /home/nobody/tint2.sh &
 
 # STARTCMD_PLACEHOLDER
