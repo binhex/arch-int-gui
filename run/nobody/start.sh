@@ -44,3 +44,6 @@ sleep 2s; xcompmgr &
 sleep 2s; source /home/nobody/tint2.sh &
 
 # STARTCMD_PLACEHOLDER
+
+# run cat in foreground, this prevents start.sh script from exiting and ending all background processes
+cat
