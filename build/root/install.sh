@@ -33,7 +33,7 @@ fi
 ####
 
 # define aur packages
-aur_packages="websockify ttf-font-awesome novnc hsetroot"
+aur_packages="obmenu websockify ttf-font-awesome novnc hsetroot"
 
 # call aur install script (arch user repo)
 source aur.sh
