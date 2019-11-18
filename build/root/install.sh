@@ -42,7 +42,7 @@ source aur.sh
 ####
 
 # define python packages
-pip install numpy
+pip install numpy websockify
 
 # config - novnc
 ####
