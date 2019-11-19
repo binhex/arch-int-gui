@@ -22,7 +22,7 @@ mv /tmp/scripts-master/shell/arch/docker/*.sh /usr/local/bin/
 ####
 
 # define pacman packages
-pacman_packages="ttf-dejavu xorg-fonts-misc terminus-font ttf-dejavu xfce4-terminal tint2 xorg-server-xvfb tigervnc openbox obconf python2-xdg coreutils lxappearance xcompmgr cantarell-fonts python-pip"
+pacman_packages="ttf-dejavu xorg-fonts-misc terminus-font ttf-dejavu xfce4-terminal tint2 xorg-server-xvfb tigervnc openbox obconf python2-xdg coreutils lxappearance xcompmgr cantarell-fonts python-pip python-numpy"
 
 # install compiled packages using pacman
 if [[ ! -z "${pacman_packages}" ]]; then
@@ -37,12 +37,6 @@ aur_packages="obmenu ttf-font-awesome novnc hsetroot"
 
 # call aur install script (arch user repo)
 source aur.sh
-
-# python packages
-####
-
-# define python packages
-pip --no-cache-dir install numpy websockify
 
 # config - novnc
 ####
