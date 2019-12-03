@@ -23,7 +23,7 @@ function symlink_home_dir {
 		echo "[info] /config/home/${folder} folder storing user general settings already exists, skipping copy"
 	fi
 
-	# create soft link to /home/nobody/${folder} storing nemo general settings
+	# create soft link to /home/nobody/${folder} storing general settings
 	echo "[info] Creating soft link from /config/home/${folder} to /home/nobody/${folder}..."
 	mkdir -p "/config/home/${folder}" ; rm -rf "/home/nobody/${folder}" ; ln -s "/config/home/${folder}/" "/home/nobody/"
 
@@ -31,10 +31,12 @@ function symlink_home_dir {
 
 # call function to create symlinks
 symlink_home_dir ".config"
+symlink_home_dir ".icons"
 symlink_home_dir ".local"
 symlink_home_dir ".themes"
-symlink_home_dir ".icons"
+symlink_home_dir "gtk"
 symlink_home_dir "openbox"
+symlink_home_dir "tint2"
 
 # CONFIG_PLACEHOLDER
 
