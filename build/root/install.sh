@@ -38,6 +38,35 @@ aur_packages="obmenu ttf-font-awesome novnc hsetroot"
 # call aur install script (arch user repo)
 source aur.sh
 
+# config - look and feel
+####
+
+# download gtk icon theme (dark)
+curly.sh -rc 6 -rw 10 -of "/tmp/gtk-icon.zip" -url "https://github.com/binhex/themes/raw/master/gtk/icon-themes/BLACK-Ice-Numix-FLAT_1.4.1.zip"
+
+# unpack gtk icon theme to home dir
+unzip -d "/home/nobody/.icons/" "/tmp/gtk-icon.zip"
+
+# download gtk widget theme (dark)
+curly.sh -rc 6 -rw 10 -of "/tmp/gtk-widget.zip" -url "https://github.com/binhex/themes/raw/master/gtk/widget-theme/CBlack-2019-08.zip"
+
+# unpack gtk widget theme to home dir
+unzip -d "/home/nobody/.themes/" "/tmp/gtk-widget.zip"
+
+# download openbox theme (dark and light)
+curly.sh -rc 6 -rw 10 -of "/tmp/openbox-theme.tar.gz" -url "https://github.com/binhex/themes/raw/master/openbox/Adwaita-Revisited-for-Openbox.tar.gz"
+
+# unpack openbox theme to home dir
+tar -xvf "/tmp/openbox-theme.tar.gz" -C "/home/nobody/.themes/"
+
+# copy settings to home directory (sets gtk widget and icons)
+mkdir -p /home/nobody/.config/gtk-3.0
+cp /home/nobody/gtk/config/settings.ini /home/nobody/.config/gtk-3.0/settings.ini
+
+# copy settings to home directory (sets openbox theme and fonts)
+mkdir -p /home/nobody/.config/openbox
+cp /home/nobody/openbox/config/rc.xml /home/nobody/.config/openbox/rc.xml
+
 # config - novnc
 ####
 
@@ -46,16 +75,6 @@ sed -i -E 's~\s+<link rel="icon" sizes.*~    <link rel="icon" sizes="16x16" type
 
 # replace all novnc home screen (used for tablets etc) icon sizes with fixed 16x16 icon
 sed -i -E 's~\s+<link rel="apple-touch-icon" sizes.*~    <link rel="apple-touch-icon" sizes="16x16" type="image/png" href="app/images/icons/novnc-16x16.png">~g' "/usr/share/webapps/novnc/vnc.html"
-
-# config - openbox
-####
-
-# copy custom openbox theme
-cp -r /home/nobody/openbox/theme/Shiki-Brave /usr/share/themes/
-
-# copy custom openbox main config file to home directory (required to set theme and menu font)
-mkdir -p /home/nobody/.config/openbox
-cp /home/nobody/openbox/config/rc.xml /home/nobody/.config/openbox/rc.xml
 
 # create openbox menu items to add in application
 cat <<'EOF' > /home/nobody/.config/openbox/menu.xml
@@ -96,47 +115,6 @@ cat <<'EOF' > /home/nobody/.config/openbox/menu.xml
 </menu>
 
 </openbox_menu>
-EOF
-
-# set default system font (contents below generated via lxappearance util)
-cat <<'EOF' > /home/nobody/.gtkrc-2.0
-# DO NOT EDIT! This file will be overwritten by LXAppearance.
-# Any customization should be done in ~/.gtkrc-2.0.mine instead.
-
-include "/home/nobody/.gtkrc-2.0.mine"
-gtk-theme-name="Adwaita"
-gtk-icon-theme-name="Adwaita"
-gtk-font-name="Cantarell 8"
-gtk-cursor-theme-name="Adwaita"
-gtk-cursor-theme-size=0
-gtk-toolbar-style=GTK_TOOLBAR_BOTH
-gtk-toolbar-icon-size=GTK_ICON_SIZE_LARGE_TOOLBAR
-gtk-button-images=1
-gtk-menu-images=1
-gtk-enable-event-sounds=1
-gtk-enable-input-feedback-sounds=1
-gtk-xft-antialias=1
-gtk-xft-hinting=1
-gtk-xft-hintstyle="hintfull"
-EOF
-
-mkdir -p /home/nobody/.config/gtk-3.0
-cat <<'EOF' > /home/nobody/.config/gtk-3.0/settings.ini
-[Settings]
-gtk-theme-name=Adwaita
-gtk-icon-theme-name=Adwaita
-gtk-font-name=Cantarell 8
-gtk-cursor-theme-name=Adwaita
-gtk-cursor-theme-size=0
-gtk-toolbar-style=GTK_TOOLBAR_BOTH
-gtk-toolbar-icon-size=GTK_ICON_SIZE_LARGE_TOOLBAR
-gtk-button-images=1
-gtk-menu-images=1
-gtk-enable-event-sounds=1
-gtk-enable-input-feedback-sounds=1
-gtk-xft-antialias=1
-gtk-xft-hinting=1
-gtk-xft-hintstyle=hintfull
 EOF
 
 # set a background color for openbox (slightly lighter than default to contrast taskbar)
