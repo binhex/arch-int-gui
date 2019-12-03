@@ -1,5 +1,41 @@
 #!/bin/bash
 
+# config nemo
+####
+
+function symlink_home_dir {
+
+	folder="${1}"
+
+	# if container folder exists then rename and use as default restore
+	if [[ -d "/home/nobody/${folder}" && ! -L "/home/nobody/${folder}" ]]; then
+		echo "[info] /home/nobody/${folder} folder storing user general settings already exists, renaming..."
+		mv "/home/nobody/${folder}" "/home/nobody/${folder}-backup"
+	fi
+
+	# if /config/home/${folder} doesnt exist then restore from backup (see note above)
+	if [[ ! -d "/config/home/${folder}" ]]; then
+		if [[ -d "/home/nobody/${folder}-backup" ]]; then
+			echo "[info] /config/home/${folder} folder storing user general settings does not exist, copying defaults..."
+			mkdir -p "/config/home" ; cp -R "/home/nobody/${folder}-backup" "/config/home/${folder}"
+		fi
+	else
+		echo "[info] /config/home/${folder} folder storing user general settings already exists, skipping copy"
+	fi
+
+	# create soft link to /home/nobody/${folder} storing nemo general settings
+	echo "[info] Creating soft link from /config/home/${folder} to /home/nobody/${folder}..."
+	mkdir -p "/config/home/${folder}" ; rm -rf "/home/nobody/${folder}" ; ln -s "/config/home/${folder}/" "/home/nobody/"
+
+}
+
+# call function to create symlinks
+symlink_home_dir ".config"
+symlink_home_dir ".local"
+symlink_home_dir ".themes"
+symlink_home_dir ".icons"
+symlink_home_dir "openbox"
+
 # CONFIG_PLACEHOLDER
 
 # create env var for display (note display number must match for tigervnc)
