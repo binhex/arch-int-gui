@@ -59,7 +59,7 @@ curly.sh -rc 6 -rw 10 -of "/tmp/openbox-theme.tar.gz" -url "https://github.com/b
 # unpack openbox theme to home dir
 tar -xvf "/tmp/openbox-theme.tar.gz" -C "/home/nobody/.themes/"
 
-# copy settings to home directory (sets gtk widget and icons)
+# copy gtk-3.0 settings to home directory (sets gtk widget and icons)
 mkdir -p /home/nobody/.config/gtk-3.0
 cp /home/nobody/gtk/config/settings.ini /home/nobody/.config/gtk-3.0/settings.ini
 

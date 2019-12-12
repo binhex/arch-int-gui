@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# config nemo
-####
-
 function symlink_home_dir {
 
 	folder="${1}"
@@ -29,7 +26,7 @@ function symlink_home_dir {
 
 }
 
-# call function to create symlinks
+# call function to create symlinks for folders in home dir
 symlink_home_dir ".config"
 symlink_home_dir ".icons"
 symlink_home_dir ".local"
@@ -37,6 +34,18 @@ symlink_home_dir ".themes"
 symlink_home_dir "gtk"
 symlink_home_dir "openbox"
 symlink_home_dir "tint2"
+
+# separately symlink gtk-2.0 config file, as this is a single file in the root of the home dir
+if [[ ! -f "/config/home/.config/gtk-2.0/.gtkrc-2.0" && ! -L "/config/home/.config/gtk-2.0/.gtkrc-2.0" ]]; then
+
+	# copy gtk-2.0 settings to home directory (sets gtk widget and icons)
+	mkdir -p "/config/home/.config/gtk-2.0"
+	cp "/home/nobody/gtk/config/.gtkrc-2.0" "/config/home/.config/gtk-2.0/.gtkrc-2.0"
+
+fi
+
+# symlink gtk-2.0 config file to expected location (root of home dir)
+rm -rf "/home/nobody/.gtkrc-2.0" ; ln -s "/config/home/.config/gtk-2.0/.gtkrc-2.0" "/home/nobody/.gtkrc-2.0"
 
 # CONFIG_PLACEHOLDER
 
