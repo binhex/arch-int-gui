@@ -61,11 +61,15 @@ tar -xvf "/tmp/openbox-theme.tar.gz" -C "/home/nobody/.themes/"
 
 # copy gtk-3.0 settings to home directory (sets gtk widget and icons)
 mkdir -p /home/nobody/.config/gtk-3.0
-cp /home/nobody/gtk/config/settings.ini /home/nobody/.config/gtk-3.0/settings.ini
+cp /home/nobody/.build/gtk/config/settings.ini /home/nobody/.config/gtk-3.0/settings.ini
 
 # copy settings to home directory (sets openbox theme and fonts)
 mkdir -p /home/nobody/.config/openbox
-cp /home/nobody/openbox/config/rc.xml /home/nobody/.config/openbox/rc.xml
+cp /home/nobody/.build/openbox/config/rc.xml /home/nobody/.config/openbox/rc.xml
+
+# copy settings to home directory (sets tint2 theme)
+mkdir -p /home/nobody/.config/tint2
+cp /home/nobody/.build/openbox/config/tint2rc /home/nobody/.config/tint2/theme/tint2rc
 
 # config - novnc
 ####

@@ -14,7 +14,7 @@ ADD build/root/*.sh /root/
 ADD run/nobody/*.sh /home/nobody/
 
 # add pre-configured config files for nobody
-ADD config/nobody/ /home/nobody/
+ADD config/nobody/ /home/nobody/.build/
 
 # install app
 #############

@@ -19,7 +19,7 @@ while true; do
 	if [[ "${tint2_running}" == "false" ]];then
 
 			# run tint2 (creates task bar) with custom theme
-			/usr/bin/tint2 -c /home/nobody/tint2/theme/tint2rc
+			/usr/bin/tint2 -c /home/nobody/.config/tint2/theme/tint2rc
 
 	fi
 

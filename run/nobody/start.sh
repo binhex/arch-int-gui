@@ -31,16 +31,13 @@ symlink_home_dir ".config"
 symlink_home_dir ".icons"
 symlink_home_dir ".local"
 symlink_home_dir ".themes"
-symlink_home_dir "gtk"
-symlink_home_dir "openbox"
-symlink_home_dir "tint2"
 
 # separately symlink gtk-2.0 config file, as this is a single file in the root of the home dir
 if [[ ! -f "/config/home/.config/gtk-2.0/.gtkrc-2.0" && ! -L "/config/home/.config/gtk-2.0/.gtkrc-2.0" ]]; then
 
 	# copy gtk-2.0 settings to home directory (sets gtk widget and icons)
 	mkdir -p "/config/home/.config/gtk-2.0"
-	cp "/home/nobody/gtk/config/gtkrc-2.0" "/config/home/.config/gtk-2.0/.gtkrc-2.0"
+	cp "/home/nobody/.build/gtk/config/gtkrc-2.0" "/config/home/.config/gtk-2.0/.gtkrc-2.0"
 
 fi
 
