@@ -68,7 +68,7 @@ mkdir -p /home/nobody/.config/openbox
 cp /home/nobody/.build/openbox/config/rc.xml /home/nobody/.config/openbox/rc.xml
 
 # copy settings to home directory (sets tint2 theme)
-mkdir -p /home/nobody/.config/tint2
+mkdir -p /home/nobody/.config/tint2/theme
 cp /home/nobody/.build/tint2/theme/tint2rc /home/nobody/.config/tint2/theme/tint2rc
 
 # config - novnc
