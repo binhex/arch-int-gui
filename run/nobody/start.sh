@@ -40,7 +40,7 @@ if [[ ! -f "/config/home/.config/gtk-2.0/.gtkrc-2.0" && ! -L "/config/home/.conf
 
 	# copy gtk-2.0 settings to home directory (sets gtk widget and icons)
 	mkdir -p "/config/home/.config/gtk-2.0"
-	cp "/home/nobody/gtk/config/.gtkrc-2.0" "/config/home/.config/gtk-2.0/.gtkrc-2.0"
+	cp "/home/nobody/gtk/config/gtkrc-2.0" "/config/home/.config/gtk-2.0/.gtkrc-2.0"
 
 fi
 
