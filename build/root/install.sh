@@ -59,7 +59,8 @@ curly.sh -rc 6 -rw 10 -of "/tmp/gtk-widget-light.zip" -url "https://github.com/b
 curly.sh -rc 6 -rw 10 -of "/tmp/gtk-widget-dark.zip" -url "https://github.com/binhex/themes/raw/master/gtk/widget-theme/Ultimate-Maia-Blue-dark-v3.34.zip"
 
 # unpack gtk widget theme to home dir
-unzip -d "/home/nobody/.themes/" /tmp/gtk-widget*.zip
+unzip -d "/home/nobody/.themes/" "/tmp/gtk-widget-light.zip"
+unzip -d "/home/nobody/.themes/" "/tmp/gtk-widget-dark.zip"
 
 # download openbox theme (dark and light)
 curly.sh -rc 6 -rw 10 -of "/tmp/openbox-theme.tar.gz" -url "https://github.com/binhex/themes/raw/master/openbox/Adwaita-Revisited-for-Openbox.tar.gz"
