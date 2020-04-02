@@ -38,6 +38,11 @@ aur_packages="obmenu ttf-font-awesome novnc hsetroot"
 # call aur install script (arch user repo)
 source aur.sh
 
+# python packages
+####
+
+pip install websockify PyXDG
+
 # config - look and feel
 ####
 
@@ -47,11 +52,14 @@ curly.sh -rc 6 -rw 10 -of "/tmp/gtk-icon.zip" -url "https://github.com/binhex/th
 # unpack gtk icon theme to home dir
 unzip -d "/home/nobody/.icons/" "/tmp/gtk-icon.zip"
 
+# download gtk widget theme (light)
+curly.sh -rc 6 -rw 10 -of "/tmp/gtk-widget-light.zip" -url "https://github.com/binhex/themes/raw/master/gtk/widget-theme/Ultimate-Maia-Blue-light-v3.34.zip"
+
 # download gtk widget theme (dark)
-curly.sh -rc 6 -rw 10 -of "/tmp/gtk-widget.zip" -url "https://github.com/binhex/themes/raw/master/gtk/widget-theme/CBlack-2019-08.zip"
+curly.sh -rc 6 -rw 10 -of "/tmp/gtk-widget-dark.zip" -url "https://github.com/binhex/themes/raw/master/gtk/widget-theme/Ultimate-Maia-Blue-dark-v3.34.zip"
 
 # unpack gtk widget theme to home dir
-unzip -d "/home/nobody/.themes/" "/tmp/gtk-widget.zip"
+unzip -d "/home/nobody/.themes/" /tmp/gtk-widget*.zip
 
 # download openbox theme (dark and light)
 curly.sh -rc 6 -rw 10 -of "/tmp/openbox-theme.tar.gz" -url "https://github.com/binhex/themes/raw/master/openbox/Adwaita-Revisited-for-Openbox.tar.gz"
