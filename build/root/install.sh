@@ -3,9 +3,6 @@
 # exit script if return code != 0
 set -e
 
-# set user "nobody" home directory (issue with pycharm) - hack please remove once new base built.
-usermod -d /home/nobody nobody
-
 # build scripts
 ####
 
