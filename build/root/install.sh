@@ -169,5 +169,33 @@ sed -i '/# ENVVARS_PLACEHOLDER/{
 }' /usr/local/bin/init.sh
 rm /tmp/envvars_heredoc
 
+# container perms
+####
+
+# define comma separated list of paths 
+install_paths="/home/nobody"
+
+# split comma separated string into list for install paths
+IFS=',' read -ra install_paths_list <<< "${install_paths}"
+
+# process install paths in the list
+for i in "${install_paths_list[@]}"; do
+
+	# confirm path(s) exist, if not then exit
+	if [[ ! -d "${i}" ]]; then
+		echo "[crit] Path '${i}' does not exist, exiting build process..." ; exit 1
+	fi
+
+done
+
+# convert comma separated string of install paths to space separated, required for chmod/chown processing
+install_paths=$(echo "${install_paths}" | tr ',' ' ')
+
+# set permissions for container during build - Do NOT double quote variable for install_paths otherwise this will wrap space separated paths as a single string
+chmod -R 775 "${install_paths}"
+
+# set ownership back to user 'nobody', required after copying of configs and themes
+chown -R nobody:users "${install_paths}"
+
 # cleanup
 cleanup.sh
