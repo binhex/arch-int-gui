@@ -50,15 +50,16 @@ rm -rf "/home/nobody/.gtkrc-2.0" ; ln -s "/config/home/.config/gtk-2.0/.gtkrc-2.
 export DISPLAY=:0
 
 # vnc start command
-vnc_start="rm -rf /tmp/.X*; vncserver :0 -depth 24"
+vnc_start="rm -rf /tmp/.X*; Xvnc :0 -depth 24"
 
-# if a password is specified then generate password file
+# if a password is specified then generate password file in /home/nobody/.vnc/passwd
 # else append insecure flag to command line
 if [[ -n "${VNC_PASSWORD}" ]]; then
 	password_length="${#VNC_PASSWORD}"
 	if [[ "${password_length}" -gt 5 ]]; then
 		echo "[info] Password length OK, proceeding to set password..."
 		echo -e "${VNC_PASSWORD}\n${VNC_PASSWORD}\nn" | vncpasswd 1>&- 2>&-
+		vnc_start="${vnc_start} -PasswordFile=${HOME}/.vnc/passwd"
 	else
 		echo "[warn] Password specified is less than 6 characters and thus will be ignored."
 		vnc_start="${vnc_start} -SecurityTypes=None"
@@ -67,13 +68,13 @@ else
 	vnc_start="${vnc_start} -SecurityTypes=None"
 fi
 
-# start tigervnc (vnc server) - note the port that it runs on is 5900 + display number (i.e. 5900 + 0 in the case below).
-eval "${vnc_start}"
-
 # if defined then set title for the web ui tab
 if [[ -n "${WEBPAGE_TITLE}" ]]; then
-	vncconfig -set desktop="${WEBPAGE_TITLE}"
+	vnc_start="${vnc_start} -Desktop=${WEBPAGE_TITLE}"
 fi
+
+# start tigervnc (vnc server) - note the port that it runs on is 5900 + display number (i.e. 5900 + 0 in the case below).
+eval "${vnc_start}" &
 
 # starts novnc (web vnc client) - note also starts websockify to connect novnc to tigervnc server
 /usr/sbin/websockify --web /usr/share/webapps/novnc/ 6080 localhost:5900 &
