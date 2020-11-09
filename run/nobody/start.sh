@@ -27,10 +27,15 @@ function symlink_home_dir {
 }
 
 # call function to create symlinks for folders in home dir
+symlink_home_dir "Desktop"
 symlink_home_dir ".config"
 symlink_home_dir ".icons"
 symlink_home_dir ".local"
 symlink_home_dir ".themes"
+symlink_home_dir ".cache"
+symlink_home_dir ".build"
+symlink_home_dir ".vscode"
+symlink_home_dir ".pki"
 
 # separately symlink gtk-2.0 config file, as this is a single file in the root of the home dir
 if [[ ! -f "/config/home/.config/gtk-2.0/.gtkrc-2.0" && ! -L "/config/home/.config/gtk-2.0/.gtkrc-2.0" ]]; then

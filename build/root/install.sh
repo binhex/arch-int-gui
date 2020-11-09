@@ -138,6 +138,7 @@ cat <<'EOF' > /home/nobody/.config/openbox/menu.xml
       <startupnotify><enabled>yes</enabled></startupnotify>
     </action>
     </item>
+    <!-- UTILS_PLACEHOLDER -->
 </menu>
 
 </openbox_menu>
