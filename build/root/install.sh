@@ -138,6 +138,12 @@ cat <<'EOF' > /home/nobody/.config/openbox/menu.xml
       <startupnotify><enabled>yes</enabled></startupnotify>
     </action>
     </item>
+    <item label="tint2 GUI Editor">
+    <action name="Execute">
+      <command>tint2conf</command>
+      <startupnotify><enabled>yes</enabled></startupnotify>
+    </action>
+    </item>
     <!-- UTILS_PLACEHOLDER -->
 </menu>
 
