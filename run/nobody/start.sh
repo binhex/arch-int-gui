@@ -34,7 +34,6 @@ symlink_home_dir ".local"
 symlink_home_dir ".themes"
 symlink_home_dir ".cache"
 symlink_home_dir ".build"
-symlink_home_dir ".vscode"
 symlink_home_dir ".pki"
 
 # separately symlink gtk-2.0 config file, as this is a single file in the root of the home dir
