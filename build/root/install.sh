@@ -60,23 +60,23 @@ pip install websockify PyXDG
 ####
 
 # download gtk icon theme (dark)
-curly.sh -of "/tmp/gtk-icon.zip" -url "https://github.com/binhex/themes/raw/master/gtk/icon-themes/BLACK-Ice-Numix-FLAT_1.4.1.zip"
+rcurl.sh -o "/tmp/gtk-icon.zip" "https://github.com/binhex/themes/raw/master/gtk/icon-themes/BLACK-Ice-Numix-FLAT_1.4.1.zip"
 
 # unpack gtk icon theme to home dir
 unzip -d "/home/nobody/.icons/" "/tmp/gtk-icon.zip"
 
 # download gtk widget theme (light)
-curly.sh -of "/tmp/gtk-widget-light.zip" -url "https://github.com/binhex/themes/raw/master/gtk/widget-theme/Ultimate-Maia-Blue-light-v3.34.zip"
+rcurl.sh -o "/tmp/gtk-widget-light.zip" "https://github.com/binhex/themes/raw/master/gtk/widget-theme/Ultimate-Maia-Blue-light-v3.34.zip"
 
 # download gtk widget theme (dark)
-curly.sh -of "/tmp/gtk-widget-dark.zip" -url "https://github.com/binhex/themes/raw/master/gtk/widget-theme/Ultimate-Maia-Blue-dark-v3.34.zip"
+rcurl.sh -o "/tmp/gtk-widget-dark.zip" "https://github.com/binhex/themes/raw/master/gtk/widget-theme/Ultimate-Maia-Blue-dark-v3.34.zip"
 
 # unpack gtk widget theme to home dir
 unzip -d "/home/nobody/.themes/" "/tmp/gtk-widget-light.zip"
 unzip -d "/home/nobody/.themes/" "/tmp/gtk-widget-dark.zip"
 
 # download openbox theme (dark and light)
-curly.sh -of "/tmp/openbox-theme.tar.gz" -url "https://github.com/binhex/themes/raw/master/openbox/Adwaita-Revisited-for-Openbox.tar.gz"
+rcurl.sh -o "/tmp/openbox-theme.tar.gz" "https://github.com/binhex/themes/raw/master/openbox/Adwaita-Revisited-for-Openbox.tar.gz"
 
 # unpack openbox theme to home dir
 tar -xvf "/tmp/openbox-theme.tar.gz" -C "/home/nobody/.themes/"
