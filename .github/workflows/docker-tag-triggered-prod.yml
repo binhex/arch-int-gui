@@ -35,7 +35,7 @@ jobs:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
           password: ${{ secrets.CR_PAT }}
-      - name: Show Runners environment (debug)
+      - name: [DEBUG] Show Runners environment
         uses: nick-invision/retry@v2.4.0
         with:
           timeout_minutes: 60
@@ -72,6 +72,15 @@ jobs:
               --tag ghcr.io/${{ github.repository }}:latest \
               --tag ghcr.io/${{ github.repository }}:${{ steps.identify_tag.outputs.tag }} \
               .
+      - name: [DEBUG] Show built Docker Images
+        uses: nick-invision/retry@v2.4.0
+        with:
+          timeout_minutes: 60
+          max_attempts: 3
+          retry_wait_seconds: 120
+          retry_on: error
+          command: |
+            docker images
       - name: Push Docker image to Docker Hub
         uses: nick-invision/retry@v2.4.0
         with:
