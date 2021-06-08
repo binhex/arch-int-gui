@@ -35,7 +35,7 @@ jobs:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
           password: ${{ secrets.CR_PAT }}
-      - name: [DEBUG] Show Runners environment
+      - name: DEBUG Show Runners environment
         uses: nick-invision/retry@v2.4.0
         with:
           timeout_minutes: 60
@@ -72,7 +72,7 @@ jobs:
               --tag ghcr.io/${{ github.repository }}:latest \
               --tag ghcr.io/${{ github.repository }}:${{ steps.identify_tag.outputs.tag }} \
               .
-      - name: [DEBUG] Show built Docker Images
+      - name: DEBUG Show built Docker Images
         uses: nick-invision/retry@v2.4.0
         with:
           timeout_minutes: 60
