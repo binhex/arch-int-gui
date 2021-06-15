@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# call symlink function from utils.sh
-source '/usr/local/bin/utils.sh' && symlink --src-path '/home/nobody' --dst-path '/config/home' --link-type 'softlink' --debug 'yes'
-
 # CONFIG_PLACEHOLDER
 
 # create env var for display (note display number must match for tigervnc)

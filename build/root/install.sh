@@ -189,10 +189,27 @@ sed -i '/# ENVVARS_PLACEHOLDER/{
 }' /usr/local/bin/init.sh
 rm /tmp/envvars_heredoc
 
+# config
+####
+
+cat <<'EOF' > /tmp/config_heredoc
+
+# call symlink function from utils.sh
+symlink --src-path '/home/nobody' --dst-path '/config/code-server/home' --link-type 'softlink' --debug 'yes'
+
+EOF
+
+# replace config placeholder string with contents of file (here doc)
+sed -i '/# CONFIG_PLACEHOLDER/{
+    s/# CONFIG_PLACEHOLDER//g
+    r /tmp/config_heredoc
+}' /usr/local/bin/init.sh
+rm /tmp/config_heredoc
+
 # container perms
 ####
 
-# define comma separated list of paths 
+# define comma separated list of paths
 install_paths="/home/nobody"
 
 # split comma separated string into list for install paths
