@@ -10,8 +10,8 @@ ADD build/*.conf /etc/supervisor/conf.d/
 # add install bash script
 ADD build/root/*.sh /root/
 
-# add bash script to run deluge
-ADD run/nobody/*.sh /home/nobody/
+# add bash script to run app
+ADD run/nobody/*.sh /usr/local/bin/
 
 # add pre-configured config files for nobody
 ADD config/nobody/ /home/nobody/.build/
