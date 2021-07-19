@@ -42,7 +42,7 @@ dbus-launch openbox-session &
 sleep 2s; xcompmgr &
 
 # run tint2 (creates task bar) with custom theme (in while loop to restart on process end)
-sleep 2s; source /home/nobody/tint2.sh &
+sleep 2s; source /usr/local/bin/tint2.sh &
 
 # STARTCMD_PLACEHOLDER
 
