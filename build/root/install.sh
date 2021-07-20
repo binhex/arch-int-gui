@@ -81,6 +81,9 @@ rcurl.sh -o "/tmp/openbox-theme.tar.gz" "https://github.com/binhex/themes/raw/ma
 # unpack openbox theme to home dir
 tar -xvf "/tmp/openbox-theme.tar.gz" -C "/home/nobody/.themes/"
 
+# copy gtk-2.0 settings to home directory (sets gtk widget and icons)
+cp /home/nobody/.build/gtk/config/.gtkrc-2.0 /home/nobody/.gtkrc-2.0
+
 # copy gtk-3.0 settings to home directory (sets gtk widget and icons)
 mkdir -p /home/nobody/.config/gtk-3.0
 cp /home/nobody/.build/gtk/config/settings.ini /home/nobody/.config/gtk-3.0/settings.ini
