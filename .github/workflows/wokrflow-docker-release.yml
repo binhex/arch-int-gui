@@ -1,4 +1,4 @@
-name: docker-tag-triggered-int-gui-prod
+name: wokrflow-docker-release
 
 on:
   push:
@@ -29,7 +29,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_PASSWORD }} # NOTE: This MUST be the password NOT the token
           repository: ${{ github.repository }}
           short-description: ${{ github.event.repository.description }}
-      - name: Show Runners environment (debug)
+      - name: DEBUG Show Runners environment
         uses: nick-invision/retry@v2.4.0
         with:
           timeout_minutes: 5
@@ -51,15 +51,26 @@ jobs:
             echo "##[set-output name=tag;]$(tag_name=${GITHUB_REF#refs/tags/} && echo "${tag_name//+/-}")"
         id: identify_tag
       - name: Build Docker image and tag
-        # note this step MUST be run as a standard run command do NOT use retry github action
-        shell: bash
-        run: |
-          docker build \
-            --tag ${{ github.repository }}:latest \
-            --tag ${{ github.repository }}:${{ steps.identify_tag.outputs.tag }} \
-            --tag ghcr.io/${{ github.repository }}:latest \
-            --tag ghcr.io/${{ github.repository }}:${{ steps.identify_tag.outputs.tag }} \
-            .
+        uses: nick-invision/retry@v2.4.0
+        with:
+          timeout_minutes: 60
+          max_attempts: 3
+          retry_wait_seconds: 120
+          command: |
+            docker build \
+              --tag ${{ github.repository }}:latest \
+              --tag ${{ github.repository }}:${{ steps.identify_tag.outputs.tag }} \
+              --tag ghcr.io/${{ github.repository }}:latest \
+              --tag ghcr.io/${{ github.repository }}:${{ steps.identify_tag.outputs.tag }} \
+              .
+      - name: DEBUG Show built Docker Images
+        uses: nick-invision/retry@v2.4.0
+        with:
+          timeout_minutes: 5
+          max_attempts: 3
+          retry_wait_seconds: 120
+          command: |
+            docker images
       - name: Push Docker image to Docker Hub
         uses: nick-invision/retry@v2.4.0
         with:
