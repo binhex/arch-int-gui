@@ -26,7 +26,7 @@ fi
 
 # if defined then set title for the web ui tab
 if [[ -n "${WEBPAGE_TITLE}" ]]; then
-	vnc_start="${vnc_start} -Desktop=${WEBPAGE_TITLE}"
+	vnc_start="${vnc_start} -Desktop='${WEBPAGE_TITLE}'"
 fi
 
 # start tigervnc (vnc server) - note the port that it runs on is 5900 + display number (i.e. 5900 + 0 in the case below).
