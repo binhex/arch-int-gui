@@ -84,6 +84,9 @@ jobs:
             --tag ${{ github.repository }}:${{ steps.generate_temporary_tag_name.outputs.test_tag }} \
             --tag ${{ github.repository }}:latest \
             --tag ${{ github.repository }}:${{ steps.identify_github_release_tag_name.outputs.tag }} \
+            --tag quay.io/${{ github.repository }}:${{ steps.generate_temporary_tag_name.outputs.test_tag }} \
+            --tag quay.io/${{ github.repository }}:latest \
+            --tag quay.io/${{ github.repository }}:${{ steps.identify_github_release_tag_name.outputs.tag }} \
             --tag ghcr.io/${{ github.repository }}:${{ steps.generate_temporary_tag_name.outputs.test_tag }} \
             --tag ghcr.io/${{ github.repository }}:latest \
             --tag ghcr.io/${{ github.repository }}:${{ steps.identify_github_release_tag_name.outputs.tag }} \

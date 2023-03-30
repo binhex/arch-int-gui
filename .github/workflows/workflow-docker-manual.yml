@@ -65,6 +65,8 @@ jobs:
           docker build \
             --tag ${{ github.repository }}:${{ steps.generate_temporary_tag_name.outputs.test_tag }} \
             --tag ${{ github.repository }}:${{ github.event.inputs.tags }} \
+            --tag quay.io/${{ github.repository }}:${{ steps.generate_temporary_tag_name.outputs.test_tag }} \
+            --tag quay.io/${{ github.repository }}:${{ github.event.inputs.tags }} \
             --tag ghcr.io/${{ github.repository }}:${{ steps.generate_temporary_tag_name.outputs.test_tag }} \
             --tag ghcr.io/${{ github.repository }}:${{ github.event.inputs.tags }} \
             --tag registry.gitlab.com/${{ github.repository }}:${{ steps.generate_temporary_tag_name.outputs.test_tag }} \
