@@ -34,10 +34,6 @@ fi
 # pacman packages
 ####
 
-# TODO remove this, temporary to fix up transition from python 3.10 to 3.11
-# call pacman db and package updater script
-source upd.sh
-
 # define pacman packages
 pacman_packages="ttf-dejavu xorg-fonts-misc terminus-font ttf-dejavu xfce4-terminal tint2 xorg-server-xvfb tigervnc openbox obconf lxappearance xcompmgr cantarell-fonts python-pip python-pyxdg python-numpy"
 
