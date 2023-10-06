@@ -80,10 +80,10 @@ cp /home/nobody/.build/tint2/theme/tint2rc /home/nobody/.config/tint2/theme/tint
 ####
 
 # replace all novnc normal (used for bookmarks and favorites) icon sizes with fixed 16x16 icon
-sed -i -E 's~\s+<link rel="icon" sizes.*~    <link rel="icon" sizes="16x16" type="image/png" href="app/images/icons/novnc-16x16.png">~g' "/usr/share/webapps/novnc/vnc.html"
+sed -i -E 's~\s+<link rel="icon".*~    <link rel="icon" sizes="16x16" type="image/png" href="app/images/icons/novnc-16x16.png">~g' "/usr/share/webapps/novnc/vnc.html"
 
 # replace all novnc home screen (used for tablets etc) icon sizes with fixed 16x16 icon
-sed -i -E 's~\s+<link rel="apple-touch-icon" sizes.*~    <link rel="apple-touch-icon" sizes="16x16" type="image/png" href="app/images/icons/novnc-16x16.png">~g' "/usr/share/webapps/novnc/vnc.html"
+sed -i -E 's~\s+<link rel="apple-touch-icon".*~    <link rel="apple-touch-icon" sizes="16x16" type="image/png" href="app/images/icons/novnc-16x16.png">~g' "/usr/share/webapps/novnc/vnc.html"
 
 # create openbox menu items to add in application
 cat <<'EOF' > /home/nobody/.config/openbox/menu.xml
