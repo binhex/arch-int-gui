@@ -3,6 +3,22 @@
 # exit script if return code != 0
 set -e
 
+# release tag name from buildx arg, stripped of build ver using string manipulation
+RELEASETAG="${1//-[0-9][0-9]/}"
+
+# target arch from buildx arg
+TARGETARCH="${2}"
+
+if [[ -z "${RELEASETAG}" ]]; then
+	echo "[warn] Release tag name from build arg is empty, exiting script..."
+	exit 1
+fi
+
+if [[ -z "${TARGETARCH}" ]]; then
+	echo "[warn] Target architecture name from build arg is empty, exiting script..."
+	exit 1
+fi
+
 # build scripts
 ####
 
@@ -160,6 +176,14 @@ if [[ ! -z "${VNC_PASSWORD}" ]]; then
 	echo "[info] VNC_PASSWORD defined as '${VNC_PASSWORD}'" | ts '%Y-%m-%d %H:%M:%.S'
 fi
 
+export ENABLE_STARTUP_SCRIPTS=$(echo "${ENABLE_STARTUP_SCRIPTS}" | sed -e 's~^[ \t]*~~;s~[ \t]*$~~')
+if [[ ! -z "${ENABLE_STARTUP_SCRIPTS}" ]]; then
+	echo "[info] ENABLE_STARTUP_SCRIPTS defined as '${ENABLE_STARTUP_SCRIPTS}'" | ts '%Y-%m-%d %H:%M:%.S'
+else
+	echo "[info] ENABLE_STARTUP_SCRIPTS not defined,(via -e ENABLE_STARTUP_SCRIPTS), defaulting to 'no'" | ts '%Y-%m-%d %H:%M:%.S'
+	export ENABLE_STARTUP_SCRIPTS="no"
+fi
+
 # ENVVARS_PLACEHOLDER
 EOF
 
@@ -176,6 +200,36 @@ rm /tmp/envvars_heredoc
 ####
 
 cat <<'EOF' > /tmp/config_heredoc
+
+if [[ "${ENABLE_STARTUP_SCRIPTS}" == "yes" ]]; then
+
+	# define path to scripts
+	base_path="/config/home"
+  user_script_src_path="/home/nobody/.build/scripts/example-startup-script.sh"
+	user_script_dst_path="${base_path}/scripts"
+
+	mkdir -p "${user_script_dst_path}"
+
+	# copy example startup script
+	# note slence stdout/stderr and ensure exit code 0 due to src file may not exist (symlink)
+	if [[ ! -f "${user_script_dst_path}/example-startup-script.sh" ]]; then
+		cp "${user_script_src_path}" "${user_script_dst_path}/example-startup-script.sh" 2> /dev/null || true
+	fi
+
+	# find any scripts located in "${user_script_dst_path}"
+	user_scripts=$(find "${user_script_dst_path}" -maxdepth 1 -name '*sh' 2> '/dev/null' | xargs)
+
+	# loop over scripts, make executable and source
+	for i in ${user_scripts}; do
+		chmod +x "${i}"
+		echo "[info] Executing user script '${i}' in the background" | ts '%Y-%m-%d %H:%M:%.S'
+		source "${i}" &
+	done
+
+	# change ownership as we are running as root
+	chown -R nobody:users "${base_path}"
+
+fi
 
 # call symlink function from utils.sh
 symlink --src-path '/home/nobody' --dst-path '/config/home' --link-type 'softlink' --log-level 'WARN'
