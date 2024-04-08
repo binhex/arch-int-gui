@@ -47,7 +47,7 @@ fi
 ####
 
 # define aur packages
-aur_packages="obmenu ttf-font-awesome novnc hsetroot"
+aur_packages="obmenu3 ttf-font-awesome novnc hsetroot"
 
 # call aur install script (arch user repo)
 source aur.sh
