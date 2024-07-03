@@ -36,7 +36,7 @@ mv /tmp/scripts-master/shell/arch/docker/*.sh /usr/local/bin/
 ####
 
 # define pacman packages
-pacman_packages="ttf-dejavu xorg-fonts-misc terminus-font ttf-dejavu xfce4-terminal tint2 xorg-server-xvfb tigervnc openbox obconf lxappearance xcompmgr cantarell-fonts python-pip python-pyxdg python-numpy"
+pacman_packages="ttf-dejavu xorg-fonts-misc terminus-font ttf-dejavu xfce4-terminal tint2 xorg-server-xvfb tigervnc openbox obconf lxappearance xcompmgr cantarell-fonts python-pip python-pyxdg python-numpy firefox"
 
 # install compiled packages using pacman
 if [[ ! -z "${pacman_packages}" ]]; then
@@ -117,30 +117,46 @@ cat <<'EOF' > /home/nobody/.config/openbox/menu.xml
       </startupnotify>
     </action>
     </item>
+    <item label="Firefox">
+    <action name="Execute">
+      <command>firefox</command>
+      <startupnotify>
+        <enabled>yes</enabled>
+      </startupnotify>
+    </action>
+    </item>
     <!-- APPLICATIONS_PLACEHOLDER -->
   <separator label="Utils" />
     <item label="Openbox config">
     <action name="Execute">
       <command>obconf</command>
-      <startupnotify><enabled>yes</enabled></startupnotify>
+      <startupnotify>
+        <enabled>yes</enabled>
+      </startupnotify>
     </action>
     </item>
     <item label="Openbox menu">
     <action name="Execute">
       <command>obmenu</command>
-      <startupnotify><enabled>yes</enabled></startupnotify>
+      <startupnotify>
+        <enabled>yes</enabled>
+      </startupnotify>
     </action>
     </item>
     <item label="GTK theme">
     <action name="Execute">
       <command>lxappearance</command>
-      <startupnotify><enabled>yes</enabled></startupnotify>
+      <startupnotify>
+        <enabled>yes</enabled>
+      </startupnotify>
     </action>
     </item>
     <item label="tint2 GUI Editor">
     <action name="Execute">
       <command>tint2conf</command>
-      <startupnotify><enabled>yes</enabled></startupnotify>
+      <startupnotify>
+        <enabled>yes</enabled>
+      </startupnotify>
     </action>
     </item>
     <!-- UTILS_PLACEHOLDER -->
