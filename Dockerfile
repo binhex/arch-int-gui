@@ -33,12 +33,6 @@ RUN chmod +x /root/*.sh && \
 # docker settings
 #################
 
-# expose port for vnc client (direct connection)
-EXPOSE 5900
-
-# expose port for novnc (web interface)
-EXPOSE 6080
-
 # env
 #####
 
