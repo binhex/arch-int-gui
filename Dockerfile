@@ -1,6 +1,6 @@
 FROM binhex/arch-base:latest
-LABEL org.opencontainers.image.authors = "binhex"
-LABEL org.opencontainers.image.source = "https://github.com/binhex/arch-int-gui"
+LABEL org.opencontainers.image.authors="binhex"
+LABEL org.opencontainers.image.source="https://github.com/binhex/arch-int-gui"
 
 # release tag name from buildx arg
 ARG RELEASETAG
@@ -43,10 +43,10 @@ EXPOSE 6080
 #####
 
 # set environment variables for user nobody
-ENV HOME /home/nobody
+ENV HOME=/home/nobody
 
 # set environment variable for terminal
-ENV TERM xterm
+ENV TERM=xterm
 
 # set environment variables for language
-ENV LANG en_GB.UTF-8
+ENV LANG=en_GB.UTF-8
