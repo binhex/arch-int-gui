@@ -11,15 +11,21 @@ vnc_start="rm -rf /tmp/.X*; Xvnc :0 -depth 24"
 # if a password is specified then generate password file using vncpasswd
 # else append insecure flag to command line
 if [[ -n "${VNC_PASSWORD}" ]]; then
+
 	password_length="${#VNC_PASSWORD}"
+	vnc_password_path="${HOME}/.config/tigervnc"
+	vnc_password_filepath="${vnc_password_path}/passwd"
+
 	if [[ "${password_length}" -gt 5 ]]; then
 		echo "[info] Password length OK, proceeding to set password..."
-		echo -e "${VNC_PASSWORD}\n${VNC_PASSWORD}\nn" | vncpasswd 1>&- 2>&-
-		vnc_start="${vnc_start} -PasswordFile=${HOME}/.config/tigervnc/passwd"
+		mkdir -p "${vnc_password_path}"
+		echo -e "${VNC_PASSWORD}\n${VNC_PASSWORD}\nn" | vncpasswd "${vnc_password_filepath}" 1>&- 2>&-
+		vnc_start="${vnc_start} -PasswordFile=${vnc_password_filepath}"
 	else
 		echo "[warn] Password specified is less than 6 characters and thus will be ignored."
 		vnc_start="${vnc_start} -SecurityTypes=None"
 	fi
+
 else
 	vnc_start="${vnc_start} -SecurityTypes=None"
 fi
