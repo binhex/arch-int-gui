@@ -39,7 +39,7 @@ mv /tmp/scripts-master/shell/arch/docker/*.sh /usr/local/bin/
 ####
 
 # define pacman packages
-pacman_packages="ttf-dejavu xorg-fonts-misc terminus-font ttf-dejavu xfce4-terminal tint2 xorg-server-xvfb tigervnc openbox obconf lxappearance xcompmgr cantarell-fonts python-pip python-pyxdg python-numpy firefox"
+pacman_packages="ttf-dejavu xorg-fonts-misc terminus-font ttf-dejavu xfce4-terminal tint2 xorg-server-xvfb openbox obconf lxappearance xcompmgr cantarell-fonts python-pip python-pyxdg python-numpy firefox"
 
 # install compiled packages using pacman
 if [[ ! -z "${pacman_packages}" ]]; then
@@ -54,6 +54,14 @@ aur_packages="obmenu2-git ttf-font-awesome novnc hsetroot"
 
 # call aur install script (arch user repo)
 source aur.sh
+
+
+# custom
+####
+
+# hack to revert tigervnc due to corruption of images and general x windows issues
+curl -o /tmp/tiger.zst -L https://archive.archlinux.org/packages/t/tigervnc/tigervnc-1.13.1-5-x86_64.pkg.tar.zst
+pacman -U /tmp/tiger.zst --noconfirm
 
 # config - look and feel
 ####
