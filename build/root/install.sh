@@ -55,7 +55,6 @@ aur_packages="obmenu2-git ttf-font-awesome novnc hsetroot"
 # call aur install script (arch user repo)
 source aur.sh
 
-
 # custom
 ####
 
