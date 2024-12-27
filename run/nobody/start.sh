@@ -1,5 +1,8 @@
 #!/usr/bin/dumb-init /bin/bash
 
+# activate virtualenv
+source "${HOME}/.venv/bin/activate"
+
 # CONFIG_PLACEHOLDER
 
 # create env var for display (note display number must match for tigervnc)
@@ -39,7 +42,8 @@ fi
 eval "${vnc_start}" &
 
 # starts novnc (web vnc client) - note also starts websockify to connect novnc to tigervnc server
-/usr/sbin/websockify --web /usr/share/webapps/novnc/ 6080 localhost:5900 &
+# websockify is installed via pip in pyenv and is on the path, thus no path specified
+websockify --web /usr/share/webapps/novnc/ 6080 localhost:5900 &
 
 # start dbus (required for libreoffice menus to be viewable when started via openbox right click menu) and launch openbox (window manager)
 dbus-launch openbox-session &

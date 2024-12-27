@@ -39,7 +39,7 @@ mv /tmp/scripts-master/shell/arch/docker/*.sh /usr/local/bin/
 ####
 
 # define pacman packages
-pacman_packages="ttf-dejavu xorg-fonts-misc terminus-font ttf-dejavu xfce4-terminal tint2 xorg-server-xvfb openbox obconf lxappearance xcompmgr cantarell-fonts python-pip python-pyxdg python-numpy firefox"
+pacman_packages="ttf-dejavu xorg-fonts-misc terminus-font ttf-dejavu xfce4-terminal tint2 xorg-server-xvfb openbox obconf lxappearance xcompmgr cantarell-fonts firefox"
 
 # install compiled packages using pacman
 if [[ ! -z "${pacman_packages}" ]]; then
@@ -54,6 +54,26 @@ aur_packages="obmenu2-git ttf-font-awesome novnc hsetroot"
 
 # call aur install script (arch user repo)
 source aur.sh
+
+# python
+####
+
+python.sh --create-virtualenv 'yes' --create-pyenv 'yes' --pyenv-version '3.12' --pip-packages 'pyxdg numpy cffi websockify'
+
+# # define version of python to install
+# python_version="3.12"
+
+# # install pyenv
+# pacman -S pyenv --noconfirm
+
+# # install version of python usiong pyenv
+# pyenv install "${python_version}"
+
+# # define path to pyenv python version
+# pyenv_root=$(echo ${HOME}/.pyenv/versions/${python_version}*)
+
+# # install required packages
+# "${pyenv_root}/bin/pip" install pyxdg numpy cffi websockify --break-system-packages
 
 # custom
 ####
@@ -261,7 +281,7 @@ if [[ "${ENABLE_STARTUP_SCRIPTS}" == "yes" ]]; then
 fi
 
 # call symlink function from utils.sh
-symlink --src-path '/home/nobody' --dst-path '/config/home' --link-type 'softlink' --log-level 'WARN'
+symlink --src-path '/home/nobody' --dst-path '/config/home' --link-type 'softlink'
 
 EOF
 
