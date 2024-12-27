@@ -1,7 +1,7 @@
 #!/usr/bin/dumb-init /bin/bash
 
 # activate virtualenv
-source "${HOME}/.venv/bin/activate"
+source "/usr/local/lib/venv/bin/activate"
 
 # CONFIG_PLACEHOLDER
 
