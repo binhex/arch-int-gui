@@ -60,21 +60,6 @@ source aur.sh
 
 python.sh --create-virtualenv 'yes' --create-pyenv 'yes' --pyenv-version '3.12' --pip-packages 'pyxdg numpy cffi websockify'
 
-# # define version of python to install
-# python_version="3.12"
-
-# # install pyenv
-# pacman -S pyenv --noconfirm
-
-# # install version of python usiong pyenv
-# pyenv install "${python_version}"
-
-# # define path to pyenv python version
-# pyenv_root=$(echo ${HOME}/.pyenv/versions/${python_version}*)
-
-# # install required packages
-# "${pyenv_root}/bin/pip" install pyxdg numpy cffi websockify --break-system-packages
-
 # custom
 ####
 
