@@ -39,7 +39,7 @@ mv /tmp/scripts-master/shell/arch/docker/*.sh /usr/local/bin/
 ####
 
 # define pacman packages
-pacman_packages="ttf-dejavu xorg-fonts-misc terminus-font ttf-dejavu xfce4-terminal tint2 xorg-server-xvfb openbox obconf lxappearance xcompmgr cantarell-fonts firefox"
+pacman_packages="ttf-dejavu xorg-fonts-misc terminus-font ttf-dejavu xfce4-terminal tint2 xorg-server-xvfb openbox obconf-qt lxappearance xcompmgr cantarell-fonts firefox tigervnc"
 
 # install compiled packages using pacman
 if [[ ! -z "${pacman_packages}" ]]; then
@@ -60,15 +60,15 @@ source aur.sh
 
 python.sh --create-virtualenv 'yes' --create-pyenv 'yes' --pyenv-version '3.12' --pip-packages 'pyxdg numpy cffi websockify'
 
-# custom
-####
+# # custom
+# ####
 
-# tigervnc 1.14.0 is currently causing corruption of images and general x-windows issues, this is a revert to tigervnc v.1.13.x until 1.14.x is more stable
-curl -o /tmp/tiger.zst -L https://archive.archlinux.org/packages/t/tigervnc/tigervnc-1.13.1-5-x86_64.pkg.tar.zst
-pacman -U /tmp/tiger.zst --noconfirm
+# # tigervnc 1.14.0 is currently causing corruption of images and general x-windows issues, this is a revert to tigervnc v.1.13.x until 1.14.x is more stable
+# curl -o /tmp/tiger.zst -L https://archive.archlinux.org/packages/t/tigervnc/tigervnc-1.13.1-5-x86_64.pkg.tar.zst
+# pacman -U /tmp/tiger.zst --noconfirm
 
-# add filesystem and tigervnc to exclude to prevent upgrade in subsequent image builds
-sed -i -e 's~IgnorePkg.*~IgnorePkg = filesystem tigervnc~g' '/etc/pacman.conf'
+# # add filesystem and tigervnc to exclude to prevent upgrade in subsequent image builds
+# sed -i -e 's~IgnorePkg.*~IgnorePkg = filesystem tigervnc~g' '/etc/pacman.conf'
 
 # config - look and feel
 ####
@@ -147,7 +147,7 @@ cat <<'EOF' > /home/nobody/.config/openbox/menu.xml
   <separator label="Utils" />
     <item label="Openbox config">
     <action name="Execute">
-      <command>obconf</command>
+      <command>obconf-qt</command>
       <startupnotify>
         <enabled>yes</enabled>
       </startupnotify>

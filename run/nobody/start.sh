@@ -56,5 +56,5 @@ sleep 2s; source /usr/local/bin/tint2.sh &
 
 # STARTCMD_PLACEHOLDER
 
-# run cat in foreground, this prevents start.sh script from exiting and ending all background processes
-cat
+# foreground blocking process to keep container running
+sleep infinity
