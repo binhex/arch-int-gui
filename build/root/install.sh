@@ -64,13 +64,13 @@ python.sh --create-virtualenv 'yes' --create-pyenv 'yes' --pyenv-version '3.12' 
 # ####
 
 # tigervnc 1.14.0 is causing corruption of images and general x-windows issues
-# tigervnc 1.15.0 is causing connection issues to Xvnc (server side of tigervnc) on port 5900 (runs server but no connection is possible)
 # this is a revert to tigervnc v.1.13.x until 1.15.x is more stable
 curl -o /tmp/tiger.zst -L https://archive.archlinux.org/packages/t/tigervnc/tigervnc-1.13.1-5-x86_64.pkg.tar.zst
 pacman -U /tmp/tiger.zst --noconfirm
 
 # add filesystem and tigervnc to exclude to prevent upgrade in subsequent image builds
-sed -i -e 's~IgnorePkg.*~IgnorePkg = filesystem tigervnc~g' '/etc/pacman.conf'
+# exclude llvm-libs to prevent connectivity issues seen 2025-05
+sed -i -e 's~IgnorePkg.*~IgnorePkg = filesystem tigervnc llvm-libs~g' '/etc/pacman.conf'
 
 # config - look and feel
 ####
