@@ -39,7 +39,7 @@ mv /tmp/scripts-master/shell/arch/docker/*.sh /usr/local/bin/
 ####
 
 # define pacman packages
-pacman_packages="ttf-dejavu xorg-fonts-misc terminus-font ttf-dejavu xfce4-terminal tint2 xorg-server-xvfb openbox obconf-qt lxappearance xcompmgr cantarell-fonts firefox tigervnc"
+pacman_packages="ttf-dejavu xorg-fonts-misc terminus-font ttf-dejavu xfce4-terminal tint2 xorg-server-xvfb openbox obconf-qt lxappearance xcompmgr cantarell-fonts firefox"
 
 # install compiled packages using pacman
 if [[ ! -z "${pacman_packages}" ]]; then
