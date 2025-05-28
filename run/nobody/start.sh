@@ -41,9 +41,40 @@ fi
 # start tigervnc (vnc server) - note the port that it runs on is 5900 + display number (i.e. 5900 + 0 in the case below).
 eval "${vnc_start}" &
 
+websockify_start='websockify --web /usr/share/webapps/novnc/ 6080 localhost:5900'
+
+if [[ ! -d '/config/certs' ]]; then
+	echo "[info] Creating '/config/certs' directory for self-signed certificate..."
+	mkdir -p '/config/certs'
+fi
+
+if [[ ! -f '/config/certs/self-signed.key' ]] || [[ ! -f '/config/certs/self-signed.crt' ]]; then
+	echo "[info] Generating self-signed certificate for websockify..."
+	# generate self signed certificate for websockify (required for novnc)
+	openssl req \
+		-x509 \
+		-newkey 'rsa:4096' \
+		-sha256 \
+		-days '3650' \
+		-nodes \
+		-keyout '/config/certs/self-signed.key' \
+		-out '/config/certs/self-signed.crt' \
+		-subj '/CN=localhost'
+else
+	echo "[info] Self-signed certificate already exists, skipping generation..."
+fi
+
+if [[ -n "${HTTPS_CERT_PATH}" ]] && [[ -n "${HTTPS_KEY_PATH}" ]]; then
+	echo "[info] Using custom certificate and key for websockify..."
+	websockify_start="${websockify_start} --cert=${HTTPS_CERT_PATH} --key=${HTTPS_KEY_PATH}"
+else
+	echo "[info] Using self-signed certificate for websockify..."
+	websockify_start="${websockify_start} --cert=/config/certs/self-signed.crt --key=/config/certs/self-signed.key"
+fi
+
 # starts novnc (web vnc client) - note also starts websockify to connect novnc to tigervnc server
 # websockify is installed via pip in pyenv and is on the path, thus no path specified
-websockify --web /usr/share/webapps/novnc/ 6080 localhost:5900 &
+eval "${websockify_start}" &
 
 # start dbus (required for libreoffice menus to be viewable when started via openbox right click menu) and launch openbox (window manager)
 dbus-launch openbox-session &
