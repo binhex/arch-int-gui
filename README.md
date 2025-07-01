@@ -1,24 +1,28 @@
-**Application**
+# Application
 
 [Arch Linux](https://www.archlinux.org/)
 
-**Description**
+## Description
 
-Arch Linux is an independently developed, i686/x86-64 general purpose GNU/Linux distribution versatile enough to suit any role. Development focuses on simplicity, minimalism, and code elegance.
+Arch Linux is an independently developed, i686/x86-64 general purpose GNU/Linux
+distribution versatile enough to suit any role. Development focuses on
+simplicity, minimalism, and code elegance.
 
-**Build notes**
+## Build notes
 
-This is an intermediate Docker image which is used as a base image for other Docker images which require a GUI's.
+This is an intermediate Docker image which is used as a base image for other
+Docker images which require a GUI's.
 
-**Access via web interface (noVNC)**
+## Access via web interface (noVNC)
 
-`http://<host ip>:<host port>/vnc.html?resize=remote&host=<host ip>&port=<host port>&&autoconnect=1`
+`http://<host ip>:<host port>/vnc.html?resize=remote&host=<host ip>&port=<host
+port>&&autoconnect=1`
 
 e.g.:-
 
 `http://192.168.1.10:6080/vnc.html?resize=remote&host=192.168.1.10&port=6080&&autoconnect=1`
 
-**Access via VNC client**
+## Access via VNC client
 
 `<host ip>::<host port>`
 
@@ -26,9 +30,13 @@ e.g.:-
 
 `192.168.1.10::5900`
 
-**Notes**
+## Notes
 
-This image includes dumb-init (https://github.com/Yelp/dumb-init) to ensure a clean shutdown and to correctly reap processes, Supervisor (http://supervisord.org/) is also installed to help monitor and run child processes.
+This image includes dumb-init
+([https://github.com/Yelp/dumb-init](https://github.com/Yelp/dumb-init)) to
+ensure a clean shutdown and to correctly reap processes, Supervisor
+([http://supervisord.org/](http://supervisord.org/)) is also installed to help
+monitor and run child processes.
 
 If you appreciate my work, then please consider buying me a beer  :D
 
