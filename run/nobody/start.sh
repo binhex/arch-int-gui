@@ -41,7 +41,7 @@ fi
 # start tigervnc (vnc server) - note the port that it runs on is 5900 + display number (i.e. 5900 + 0 in the case below).
 eval "${vnc_start}" &
 
-websockify_start='websockify --web /usr/share/webapps/novnc/ 6080 localhost:5900'
+websockify_start="websockify --web /usr/share/webapps/novnc/ ${WEBUI_PORT} localhost:5900"
 
 if [[ ! -d '/config/certs' ]]; then
 	echo "[info] Creating '/config/certs' directory for self-signed certificate..."

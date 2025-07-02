@@ -11,7 +11,7 @@ simplicity, minimalism, and code elegance.
 ## Build notes
 
 This is an intermediate Docker image which is used as a base image for other
-Docker images which require a GUI's.
+Docker images which require a GUI.
 
 ## Access via web interface (noVNC)
 
