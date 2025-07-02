@@ -41,6 +41,13 @@ fi
 # start tigervnc (vnc server) - note the port that it runs on is 5900 + display number (i.e. 5900 + 0 in the case below).
 eval "${vnc_start}" &
 
+if [[ -z "${WEBUI_PORT}" ]]; then
+	echo "[info] Environment variable 'WEBUI_PORT' is not set, defaulting to 6080..."
+	WEBUI_PORT=6080
+else
+	echo "[info] Using WEBUI_PORT=${WEBUI_PORT}"
+fi
+
 websockify_start="websockify --web /usr/share/webapps/novnc/ ${WEBUI_PORT} localhost:5900"
 
 if [[ ! -d '/config/certs' ]]; then
