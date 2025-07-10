@@ -22,6 +22,9 @@ fi
 # write RELEASETAG to file to record the release tag used to build the image
 echo "INT_RELEASE_TAG=${RELEASETAG}" >> '/etc/image-release'
 
+# ensure we have the latest builds scripts
+refresh.sh
+
 # pacman packages
 ####
 
