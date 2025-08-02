@@ -42,7 +42,11 @@ refresh.sh
 pacman_packages="ttf-dejavu xorg-fonts-misc terminus-font ttf-dejavu xfce4-terminal tint2 xorg-server-xvfb openbox obconf-qt lxappearance xcompmgr cantarell-fonts firefox openssl"
 
 # install compiled packages using pacman
-if [[ ! -z "${pacman_packages}" ]]; then
+if [[ -n "${pacman_packages}" ]]; then
+	# arm64 currently targetting aor not archive, so we need to update the system first
+	if [[ "${TARGETARCH}" == "arm64" ]]; then
+		pacman -Syu --noconfirm
+	fi
 	pacman -S --needed $pacman_packages --noconfirm
 fi
 
