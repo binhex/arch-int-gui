@@ -54,10 +54,10 @@ fi
 ####
 
 # define aur packages
-aur_packages="obmenu2-git ttf-font-awesome novnc hsetroot"
+aur_packages="obmenu2-git,ttf-font-awesome,novnc,hsetroot"
 
 # call aur install script (arch user repo)
-source aur.sh
+aur.sh --aur-package "${aur_packages}"
 
 # python
 ####
