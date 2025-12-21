@@ -30,8 +30,6 @@ if [[ -z "${TARGETARCH}" ]]; then
 	exit 1
 fi
 
-# note do NOT write APPNAME and RELEASETAG to file, as this is an intermediate image
-
 # ensure we have the latest builds scripts
 refresh.sh
 
@@ -39,7 +37,7 @@ refresh.sh
 ####
 
 # define pacman packages
-pacman_packages="ttf-dejavu xorg-fonts-misc terminus-font ttf-dejavu xfce4-terminal tint2 xorg-server-xvfb openbox obconf-qt lxappearance xcompmgr cantarell-fonts firefox openssl"
+pacman_packages="ttf-dejavu xorg-fonts-misc terminus-font ttf-dejavu xfce4-terminal tint2 xorg-server-xvfb openbox obconf-qt lxappearance xcompmgr cantarell-fonts firefox openssl tigervnc"
 
 # install compiled packages using pacman
 if [[ -n "${pacman_packages}" ]]; then
@@ -63,20 +61,6 @@ aur.sh --aur-package "${aur_packages}"
 ####
 
 python.sh --create-virtualenv 'yes' --create-pyenv 'yes' --pyenv-version '3.12' --pip-packages 'pyxdg numpy cffi websockify'
-
-# # custom
-# ####
-
-# tigervnc 1.14.0 is causing corruption of images and general x-windows issues, revert to older version until this is resolved
-curl -o /tmp/tiger.zst -L https://archive.archlinux.org/packages/t/tigervnc/tigervnc-1.13.1-5-x86_64.pkg.tar.zst
-pacman -U /tmp/tiger.zst --noconfirm
-
-# llvm-libs v19.1.7-2 is causing connectivity issues with tigervnc/novnc, this is a revert to older version until this is resolved
-curl -o /tmp/llvm-libs.tar.zst -L https://archive.archlinux.org/packages/l/llvm-libs/llvm-libs-19.1.7-1-x86_64.pkg.tar.zst
-pacman -U /tmp/llvm-libs.tar.zst --noconfirm
-
-# add additional excludes to prevent accidental updates
-sed -i -e 's~IgnorePkg.*~IgnorePkg = filesystem tigervnc llvm-libs~g' '/etc/pacman.conf'
 
 # config - look and feel
 ####
