@@ -237,36 +237,6 @@ rm /tmp/envvars_heredoc
 
 cat <<'EOF' > /tmp/config_heredoc
 
-if [[ "${ENABLE_STARTUP_SCRIPTS}" == "yes" ]]; then
-
-	# define path to scripts
-	base_path="/config/home"
-  user_script_src_path="/home/nobody/.build/scripts/example-startup-script.sh"
-	user_script_dst_path="${base_path}/scripts"
-
-	mkdir -p "${user_script_dst_path}"
-
-	# copy example startup script
-	# note slence stdout/stderr and ensure exit code 0 due to src file may not exist (symlink)
-	if [[ ! -f "${user_script_dst_path}/example-startup-script.sh" ]]; then
-		cp "${user_script_src_path}" "${user_script_dst_path}/example-startup-script.sh" 2> /dev/null || true
-	fi
-
-	# find any scripts located in "${user_script_dst_path}"
-	user_scripts=$(find "${user_script_dst_path}" -maxdepth 1 -name '*sh' 2> '/dev/null' | xargs)
-
-	# loop over scripts, make executable and source
-	for i in ${user_scripts}; do
-		chmod +x "${i}"
-		echo "[info] Executing user script '${i}' in the background" | ts '%Y-%m-%d %H:%M:%.S'
-		source "${i}" &
-	done
-
-	# change ownership as we are running as root
-	chown -R nobody:users "${base_path}"
-
-fi
-
 # call symlink function from utils.sh
 symlink --src-path '/config/home' --dst-path '/home/nobody' --link-type 'softlink'
 
