@@ -22,7 +22,26 @@ if [[ -n "${VNC_PASSWORD}" ]]; then
 	if [[ "${password_length}" -gt 5 ]]; then
 		echo "[info] Password length OK, proceeding to set password..."
 		mkdir -p "${vnc_password_path}"
-		echo -e "${VNC_PASSWORD}\n${VNC_PASSWORD}\nn" | vncpasswd "${vnc_password_filepath}" 1>&- 2>&-
+		umask 077
+		vnc_password_tmp="${vnc_password_filepath}.tmp"
+		rm -f "${vnc_password_tmp}"
+
+		if ! printf "%s\n" "${VNC_PASSWORD}" |
+		    vncpasswd -f > "${vnc_password_tmp}"; then
+		    echo "[error] Failed to generate TigerVNC password file." >&2
+		    rm -f "${vnc_password_tmp}"
+		    exit 1
+		fi
+
+		if [[ ! -s "${vnc_password_tmp}" ]]; then
+		    echo "[error] TigerVNC generated an empty password file." >&2
+		    rm -f "${vnc_password_tmp}"
+		    exit 1
+		fi
+
+		chmod 0600 "${vnc_password_tmp}"
+		mv -f "${vnc_password_tmp}" "${vnc_password_filepath}"
+		echo "[info] TigerVNC password file created at ${vnc_password_filepath}."
 		vnc_start="${vnc_start} -PasswordFile=${vnc_password_filepath}"
 	else
 		echo "[warn] Password specified is less than 6 characters and thus will be ignored."
